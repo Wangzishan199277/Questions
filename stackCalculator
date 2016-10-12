@@ -22,6 +22,7 @@ struct stackCalculator{
         int length = input_stack.size();
         if(length >= (*sum).size()) {
             init(input_stack);
+            return;
         }
         if(length < (*sum).size() - pos) {
             pos += 1;
@@ -31,6 +32,7 @@ struct stackCalculator{
             (*sum)[pos] = poped - pushed;
             pushed = pushed + value;
         }
+            return;
     }
     
     int getSum(stack<int>& input_stack, int x) {
