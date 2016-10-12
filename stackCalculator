@@ -1,0 +1,83 @@
+// Example program
+#include <iostream>
+#include <stack>
+#include <vector>
+using namespace std;
+
+struct stackCalculator{
+    static const int ori_length = 10;
+    vector<int>* sum;
+    int pos;
+    int pushed;
+    int poped;
+    
+    stackCalculator() {
+        sum = nullptr;
+        pos = 0;
+        pushed = 0;
+        poped = 0;
+    }
+    
+    void update(stack<int>& input_stack, int value) {
+        int length = input_stack.size();
+        if(length >= (*sum).size()) {
+            init(input_stack);
+        }
+        if(length < (*sum).size() - pos) {
+            pos += 1;
+            poped += value;
+        }else if(length > (*sum).size() - pos) {
+            pos -= 1;
+            (*sum)[pos] = poped - pushed;
+            pushed = pushed + value;
+        }
+    }
+    
+    int getSum(stack<int>& input_stack, int x) {
+        if(!sum) {
+            init(input_stack);
+        }
+        return (*sum)[pos+x - 1] + pushed - poped;
+    }
+    
+    void init(stack<int> copy_stack) {
+        int size = copy_stack.size() >= ori_length ? 2 * copy_stack.size() : ori_length;
+        pos = size - copy_stack.size();
+        sum  = new vector<int>(size, 0);
+        for(int i = pos; i < size; i++) {
+            int theTop = copy_stack.top();
+            (*sum)[i] = (*sum)[i-1] + theTop;
+            copy_stack.pop();
+        }
+    }
+};
+
+int main()
+{
+  stack<int> test;
+  for(int i = 0; i< 9; i++){
+    test.push(1);    
+  }
+  stackCalculator calculator;
+  calculator.init(test);
+  cout << "length of test " << test.size() << endl;
+  for(int i = 1; i <= test.size(); i++) {
+        cout << calculator.getSum(test, i) << " " << endl;
+  }
+  cout << "length of sum " << ( *(calculator.sum)).size() << endl;
+  
+  test.push(1);
+  calculator.update(test, 1);
+   cout << "length of test " << test.size() << endl;
+  for(int i = 1; i <= test.size(); i++) {
+        cout << calculator.getSum(test, i) << " " << endl;
+  }
+  cout << "length of sum again " <<( *(calculator.sum)).size() << endl;
+//   cout << calculator.getSum(test, 1) << endl;
+//   test.push(2);
+//   calculator.update(test, 2);
+//   cout << calculator.getSum(test, 1) << endl;
+//   cout << calculator.getSum(test, 2) << endl;
+  return 0;
+}
+
