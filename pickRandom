@@ -1,0 +1,16 @@
+good rate p
+bad rate 1-p
+times of rand(): m.
+E(m) = 1*p + p*2*(1-p) + p*3*(1-p)^2 +....p*k*(1-p)^(k-1) + n*(1-p)^k
+assume k = log(1/(1-p))n
+n*(1-p)^k = 1
+so E(m) = 1*p + p*2*(1-p) + p*3*(1-p)^2 +....p*k*(1-p)^(k-1) + 1                        (1)
+(1-p)E(m) =     p*1*(1-p) + p*2*(1-p)^2 +....p*(k-1)*(1-p)^(k-1) + p*k*(1-p)^k + (1-p)  (2)
+(1) - (2)
+p*E(m) = p + p(1-p) + ....p*(1-p)^(k-1) - p*k*(1-p)^k + p
+E(m) = 1 + (1-p) + ....(1-p)^(k-1) - k*(1-p)^k + 1
+E(m) = (1- (1-p)^k)/p - k*(1-p)^k + 1
+because (1-p)^k = 1/n
+E(m) = (n-1)/np - k/n + 1
+k = log(1/(1-p))n
+So E(m) is O(1)
