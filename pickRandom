@@ -11,6 +11,6 @@ p*E(m) = p + p(1-p) + ....p*(1-p)^(k-1) - p*k*(1-p)^k + p
 E(m) = 1 + (1-p) + ....(1-p)^(k-1) - k*(1-p)^k + 1
 E(m) = (1- (1-p)^k)/p - k*(1-p)^k + 1
 because (1-p)^k = 1/n
-E(m) = (n-1)/np - k/n + 1
+E(m) = (n-1)/(np) - k/n + 1
 k = log(1/(1-p))n
 So E(m) is O(1)
