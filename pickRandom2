@@ -1,0 +1,34 @@
+struct PickRandom{
+    vector<int> value; 
+    unordered_map<int, int> hash; 
+    void insert(int val){ 
+        if(hash.find(val) == hash.end()) { 
+            value.push_back(val); 
+            int position = value.size()-1; 
+            hash[val] = position; } 
+        
+    } 
+    bool Contains(int val) { 
+        return hash.find(val) != hash.end();
+    } 
+    void Delete(int val) { 
+        if(hash.find(val) == hash.end()) {
+            return; 
+            
+        } 
+        int position_val = hash[val]; 
+        int position_last = hash[hash.back()]; 
+        hash[hash.back()] = position_val; 
+        swap(value[position_val], value[position_last]); 
+        value.pop_back(); hash.erase(val); 
+        
+    } 
+    int pickRandom() { 
+        if(value.size() == 0) { 
+            return -1; 
+        } 
+    int pos = rand()%value.size(); 
+    return value[pos]; 
+        
+    } 
+};

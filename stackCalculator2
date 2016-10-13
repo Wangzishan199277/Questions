@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+struct stackCalculator{
+    unordered_map<int, int> hash;
+    int pos;
+    int pushed;
+    int poped;
+    
+    stackCalculator() {
+        pos = 0;
+        pushed = 0;
+        poped = 0;
+    }
+    
+    void update(stack<int>& input_stack, int value) {
+        if(input_stack.size() > hash.size()) {
+            pos -= 1;
+            hash[pos] = poped - pushed;
+            pushed = pushed + value;
+        }else {
+            hash.erase(pos);
+            pos += 1;
+            poped += value;
+        }
+    }
+    
+    getSum(stack<int>& input_stack, int x) {
+        if(hash.empty()) {
+            init(input_stack);
+        }
+        return hash[x-pos] + pushed -poped;
+    }
+    
+    void init(stack<int> copy_stack) {
+        int sum = 0;
+        for(int i = 1; i <= copy_stack.size(); i++) {
+            sum += copy_stack.top();
+            hash[i] = sum;
+        }
+    }
+};
