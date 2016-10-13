@@ -28,18 +28,63 @@ struct stackCalculator{
         }
     }
     
-    getSum(stack<int>& input_stack, int x) {
+    int getSum(stack<int>& input_stack, int x) {
         if(hash.empty()) {
             init(input_stack);
         }
-        return hash[x-pos] + pushed -poped;
+        return hash[x+pos] + pushed -poped;
     }
     
     void init(stack<int> copy_stack) {
         int sum = 0;
-        for(int i = 1; i <= copy_stack.size(); i++) {
+        int size = copy_stack.size();
+        for(int i = 1; i <= size; i++) {
             sum += copy_stack.top();
             hash[i] = sum;
+            copy_stack.pop();
         }
     }
 };
+
+int main()
+{
+  stack<int> input_stack;
+  for(int i =1; i <= 10; i++) {
+      input_stack.push(i);
+  }
+  stackCalculator calculator;
+  calculator.init(input_stack);
+  for(int i = 1; i <= 10; i++) {
+      cout << calculator.getSum(input_stack, i) << endl;      
+  }
+  input_stack.push(11);
+  calculator.update(input_stack, 11);
+  cout << "push an int 11" << endl;
+  for(int i = 1; i <= 11; i++) {
+      cout << calculator.getSum(input_stack, i) << endl;    
+  }
+}
+
+10
+19
+27
+34
+40
+45
+49
+52
+54
+55
+push an int 11
+11
+21
+30
+38
+45
+51
+56
+60
+63
+65
+66
+
