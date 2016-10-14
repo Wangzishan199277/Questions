@@ -18,12 +18,12 @@ struct stackCalculator{
     
     void update(stack<int>& input_stack, int value) {
         if(input_stack.size() > hash.size()) {
-            pos -= 1;
             hash[pos] = poped - pushed;
+            pos -= 1;
             pushed = pushed + value;
         }else {
-            hash.erase(pos);
             pos += 1;
+            hash.erase(pos);
             poped += value;
         }
     }
