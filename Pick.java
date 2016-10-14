@@ -7,7 +7,7 @@ public class Pick{
         Random rand;
         PickRandom() {
             value = new ArrayList<Integer>();
-            hash = new HashMap<Integer, Integer>();
+            hash = new Hashtable<Integer, Integer>();
             rand = new Random();
         }
         void insert(int val) {
